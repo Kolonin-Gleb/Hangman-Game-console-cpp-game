@@ -1,0 +1,29 @@
+#include "Food category.h"
+
+namespace foodCategory
+{
+	void startLevel()
+	{
+		system("cls");
+
+		const short TRIES = 8;
+		short userTries = 8;
+
+		vector<string>foodWords;
+		foodWords.push_back("¡”–√≈–");
+		foodWords.push_back("ﬂ»◊Õ»÷¿");
+		foodWords.push_back("Œ√”–≈÷");
+		foodWords.push_back("À»ÃŒÕ");
+		foodWords.push_back(" Œ“À≈“¿");
+
+		random_shuffle(foodWords.begin(), foodWords.end());
+
+		const string SECRET_WORD = foodWords[0];
+		string userAnswer(SECRET_WORD.size(), '-');
+
+		string usedLetters = "";
+		char guess;
+
+		startGame(TRIES, userTries, userAnswer, usedLetters, SECRET_WORD);
+	}
+};
