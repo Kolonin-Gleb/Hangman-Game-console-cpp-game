@@ -6,24 +6,18 @@ namespace sportCategory
 	{
 		system("cls");
 
-		const short TRIES = 8;
-		short userTries = 8;
-
 		vector<string>sportWords;
 		sportWords.push_back("унййеи");
 		sportWords.push_back("тсранк");
-		sportWords.push_back("аюяйеранкк");
+		sportWords.push_back("аюяйеранк");
 		sportWords.push_back("окюбюмхе");
 		sportWords.push_back("йюпюре");
 
 		random_shuffle(sportWords.begin(), sportWords.end());
 
 		const string SECRET_WORD = sportWords[0];
-		string userAnswer(SECRET_WORD.size(), '-');
 
-		string usedLetters = "";
-
-		startGame(TRIES, userTries, userAnswer, usedLetters, SECRET_WORD);
+		startGame(SECRET_WORD);
 	}
 };
 
