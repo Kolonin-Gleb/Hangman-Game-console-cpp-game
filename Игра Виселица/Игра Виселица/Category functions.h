@@ -6,27 +6,38 @@
 
 using namespace std;
 
-void startGame(const short TRIES, short userTries, string userAnswer, string usedLetters, const string SECRET_WORD);
+void enterCorrectGuess(string* userAnswer, const string correctAnswer, char* userLetter, string* usedLetters, const short playerMistakes);
 
-char enterLetter();
+string enterWord();
 
-bool isLetterUsed(string usedLetters, char letter);
+bool isWord(const string word);
 
-void show(string usedLetters);
+string wordToWORD(string word);
 
-bool isLetterExist(char letter);
+bool isFinalDecision(const short userAnswerSize, const short correctAnswerSize);
 
-bool isSmallLetter(char letter);
+bool isLetterUsed(const string usedLetters, const char letter);
 
-bool isBigLetter(char letter);
+void show(const string usedLetters);
+
+bool isLetterExist(const char letter);
+
+bool isWordExist(const string word);
+
+bool isSmallLetter(const char letter);
+
+bool isBigLetter(const char letter);
 
 char toUpper(char ch);
 
 
 
-bool checkGuess(const string SECRET_WORD, const char guess);
+bool isLetterInWord(const string SECRET_WORD, const char letter);
 
 string addLetterToAnswer(const string SECRET_WORD, const char guess, string userAnswer);
 
-void lose(const string answer);
+bool isWin(const string answer, const string correctAnswer);
 
+void win(const short mistakes, const string answer);
+
+void lose(const string answer);

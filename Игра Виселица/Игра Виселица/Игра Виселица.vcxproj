@@ -131,6 +131,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Игра Виселица\Игра Виселица\Start game function.cpp" />
     <ClCompile Include="Category functions.cpp" />
     <ClCompile Include="Food category.cpp" />
     <ClCompile Include="Functions.cpp" />
@@ -148,10 +150,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Category functions.h" />
+    <ClInclude Include="Functions for categories.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="Food category.h" />
     <ClInclude Include="Libraries for categories.h" />
     <ClInclude Include="Sport category.h" />
+    <ClInclude Include="Start game functions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

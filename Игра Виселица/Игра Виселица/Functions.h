@@ -10,4 +10,4 @@ void showGameRules();
 
 string enterCategory();
 
-short chooseRandomCategory();
+short getRandomCategory();

@@ -43,7 +43,7 @@ int main()
 
 	if (wordCategory == RANDOM_CATEGORY)
 	{
-		wordCategory = chooseRandomCategory();
+		wordCategory = getRandomCategory();
 	}
 	if (wordCategory == FOOD_CATEGORY)
 	{

@@ -1,94 +1,83 @@
 #include "Category functions.h"
 
-void startGame(const short TRIES, short userTries, string userAnswer, string usedLetters, const string SECRET_WORD)
+void enterCorrectGuess(string* userAnswer, const string correctAnswer, char* userLetter, string* usedLetters, const short playerMistakes)
 {
-	cout << "\t\tИгра началась!" << endl;
-	char guess;
+	string userWord;
 
-	while (userTries > 0)
+	while (true)
 	{
-		while (true)
+		cout << "Загаданное слово: " << *userAnswer << endl;
+		show(*usedLetters);
+		userWord = enterWord();
+
+		if (isWord(userWord))
 		{
-			show(usedLetters);
-			cout << "Загаданное слово: " << userAnswer << endl;
-
-			guess = enterLetter();
-
-			if (isLetterUsed(usedLetters, guess))
+			if (isFinalDecision(userWord.size(), correctAnswer.size()))
 			{
-				usedLetters += guess;
-				break;
+				userWord = wordToWORD(userWord);
+				if (isWordExist(userWord))
+				{
+					if (isWin(userWord, correctAnswer))
+					{
+						*userAnswer = correctAnswer;
+						break;
+					}
+				}
+				else
+				{
+					lose(correctAnswer);
+					break;
+				}
 			}
 			else
 			{
 				system("cls");
-				cout << "Вы уже использовали букву " << guess << "!" << endl;
+				cout << "Нельзя вводить несколько букв за раз!" << endl;
 			}
 		}
-
-		if (checkGuess(SECRET_WORD, guess))
-		{
-			system("cls");
-
-			cout << "Верно, " << guess << " есть в слове!" << endl;
-			userAnswer = addLetterToAnswer(SECRET_WORD, guess, userAnswer);
-		}
+		// буква
 		else
 		{
-			system("cls");
+			*userLetter = userWord[0];
 
-			cout << "Неверно, " << guess << " нет в слове!" << endl;
-			cout << "Количество попыток = " << --userTries << endl;
-		}
-
-		if (userAnswer == SECRET_WORD)
-		{
-			cout << "Вы отгадали слово " << SECRET_WORD << " ошибившись " << TRIES - userTries << " раз! Поздравляем!" << endl;
-			break;
-		}
-	}
-	if (userTries == 0)
-	{
-		lose(SECRET_WORD);
-	}
-}
-
-char enterLetter()
-{
-	string userString;
-
-	while (true)
-	{
-		cout << "Введите букву: ";
-		cin >> userString;
-
-		if (userString.size() != 1)
-		{
-			cout << "Нельязя вводить несколько букв за раз!" << endl;
-		}
-		else
-		{
-			char userLetter = userString[0];
-
-			if (isLetterExist(userLetter))
+			if (isLetterExist(*userLetter))
 			{
-				if (isSmallLetter(userLetter))
+				if (isSmallLetter(*userLetter))
 				{
-					userLetter = toUpper(userLetter);
+					*userLetter = toUpper(*userLetter);
 				}
-				return userLetter;
+				if (!isLetterUsed(*usedLetters, *userLetter))
+				{
+					*usedLetters += *userLetter;
+					break;
+				}
+				else
+				{
+					system("cls");
+					cout << "Вы уже использовали букву " << userLetter << "!" << endl;
+				}
 			}
 			else
 			{
-				cout << "Этой буквы нет в русском алфавите, а значит и в слове!" << endl;
+				system("cls");
+				cout << "Введенная буква отсутствует в русском языке, а значит и в слове!" << endl;
 			}
 		}
 	}
 }
 
-bool isLetterUsed(string usedLetters, char letter)
+string enterWord()
 {
-	if (usedLetters.find(letter) == string::npos)
+	string guess;
+	cout << "Введите букву или загаданное слово: ";
+	cin >> guess;
+
+	return guess;
+}
+
+bool isWord(const string word)
+{
+	if (word.size() != 1)
 	{
 		return true;
 	}
@@ -98,13 +87,49 @@ bool isLetterUsed(string usedLetters, char letter)
 	}
 }
 
-void show(string usedLetters)
+string wordToWORD(string word)
+{
+	for (int i = 0; i < word.size(); i++)
+	{
+		if (isSmallLetter(word[i]))
+		{
+			word[i] = toUpper(word[i]);
+		}
+	}
+	return word;
+}
+
+bool isFinalDecision(const short userAnswerSize, const short correctAnswerSize)
+{
+	if (userAnswerSize == correctAnswerSize)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool isLetterUsed(const string usedLetters, const char letter)
+{
+	if (usedLetters.find(letter) == string::npos)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+void show(const string usedLetters)
 {
 	cout << "Вы уже использовали следующие буквы: " << endl;
 	cout << usedLetters << endl;
 }
 
-bool isLetterExist(char letter)
+bool isLetterExist(const char letter)
 {
 	if (isSmallLetter(letter))
 	{
@@ -120,7 +145,19 @@ bool isLetterExist(char letter)
 	}
 }
 
-bool isSmallLetter(char letter)
+bool isWordExist(const string word)
+{
+	for (int i = 0; i < word.size(); i++)
+	{
+		if (isSmallLetter(word[i]))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool isSmallLetter(const char letter)
 {
 	if ((letter >= -32 && letter <= -1) || letter == -72)
 	{
@@ -132,7 +169,7 @@ bool isSmallLetter(char letter)
 	}
 }
 
-bool isBigLetter(char letter)
+bool isBigLetter(const char letter)
 {
 	if ((letter >= -64 && letter <= -33) || letter == -88)
 	{
@@ -152,9 +189,9 @@ char toUpper(char ch)
 
 
 
-bool checkGuess(const string SECRET_WORD, const char guess)
+bool isLetterInWord(const string SECRET_WORD, const char letter)
 {
-	if (SECRET_WORD.find(guess) != string::npos)
+	if (SECRET_WORD.find(letter) != string::npos)
 	{
 		return true;
 	}
@@ -176,9 +213,25 @@ string addLetterToAnswer(const string SECRET_WORD, const char guess, string user
 	return userAnswer;
 }
 
+bool isWin(const string answer, const string correctAnswer)
+{
+	if (answer == correctAnswer)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void win(const short mistakes, const string answer)
+{
+	cout << "Вы отгадали слово " << answer << " ошибившись " << mistakes << " раз! Поздравляем!" << endl;
+}
+
 void lose(const string answer)
 {
 	cout << "Вы проиграли! Вам обязательно повезёт в следующий раз." << endl;
 	cout << "Слово, которое вы не смогли отгадать это: " << answer << endl;
 }
-
