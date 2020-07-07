@@ -141,12 +141,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Игра Виселица\Игра Виселица\Start game function.cpp" />
     <ClCompile Include="Category functions.cpp" />
     <ClCompile Include="Food category.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Main file.cpp" />
     <ClCompile Include="Sport category.cpp" />
+    <ClCompile Include="Start game function.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Category functions.h" />
@@ -155,7 +155,7 @@
     <ClInclude Include="Food category.h" />
     <ClInclude Include="Libraries for categories.h" />
     <ClInclude Include="Sport category.h" />
-    <ClInclude Include="Start game functions.h" />
+    <ClInclude Include="Start game function.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

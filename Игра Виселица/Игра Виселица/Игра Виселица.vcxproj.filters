@@ -39,7 +39,7 @@
     <ClCompile Include="Sport category.cpp">
       <Filter>Категории слов\Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Игра Виселица\Игра Виселица\Start game function.cpp">
+    <ClCompile Include="Start game function.cpp">
       <Filter>Категории слов\Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,7 +62,7 @@
     <ClInclude Include="Functions for categories.h">
       <Filter>Категории слов\Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Start game functions.h">
+    <ClInclude Include="Start game function.h">
       <Filter>Категории слов\Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
